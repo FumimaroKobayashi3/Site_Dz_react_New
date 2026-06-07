@@ -2,7 +2,16 @@ import { useState } from 'react'
 import FilmCard from './components/FilmCard.jsx'
 import MovieWatched from './components/MovieWactched.jsx'
 import './App.css'
+//плакатики
+import PH from './assets/PearlHarbor_Poste.jpg'
+import SO from './assets/SpaceOdyssey_Poste.jpg'
+import TEK from './assets/Tekkenmovie_Poste.jpg'
+import TRF from './assets/Transformers_Poste.jpg'
+
+import { v4 } from "uuid"
 import { useEffect } from 'react'
+import classnames from "classnames"
+
 export default function App() {
   //юзстэйты
  const [likedFilms, setLikedFilms] = useState([])
@@ -30,36 +39,40 @@ export default function App() {
  useEffect(()=>{
 
       setMovieDB([{
-        id: "00",
+        id: v4(),
         name: "Космическая Одиссея 2001",
         creator: "Стэнли Кубрик",
+        img: SO,
         genre: "Научная фантастика",
         year: 1968,
         liked: 168,
         disliked: 87
       },
       {
-        id: "01",
+        id: v4(),
         name: "Пёрл - Харбор",
         creator: "Майкл Бэй",
+        img: PH,
         genre: "Экшн",
         year: 2003,
         liked: 137,
         disliked: 27
       },
       {
-        id: "02",
+        id: v4(),
         name: "Трансформеры",
         creator: "Майкл Бэй",
+        img: TRF,
         genre: "Экшн",
         year: 2001,
         liked: 178,
         disliked: 27
       },
       {
-        id: "03",
+        id: v4(),
         name: "Теккен",
         creator: "Дуайт Х. Литтл",
+        img: TEK,
         genre: "Боевик",
         year: 2006,
         liked: 168,
@@ -107,7 +120,7 @@ for (let film of movieDB) {
   return(
     <div>
 <div>
-        <h4 style={{color: 'red'}}>Фильтр</h4>
+        <h4 className={classnames('filter-name')}>Фильтр</h4>
         <input name="title" value={filter.title} onChange={handleFilter}></input>
         <input name="yearFrom" value={filter.yearFrom} onChange={handleFilter}></input>
         <input name="yearTo" value={filter.yearTo} onChange={handleFilter}></input>
@@ -121,14 +134,14 @@ for (let film of movieDB) {
 
       {filteredMovies.map((film)=>(
         <div key={film.id}>
-        <FilmCard title={film.name} date={film.year} creatorName={film.creator} genre={film.genre} likes={film.liked} dislikes={film.disliked} onLike={handleListLike} onDisLike={handleListDisLike}/>  
+        <FilmCard title={film.name} date={film.year} creatorName={film.creator} genre={film.genre} img={film.img} likes={film.liked} dislikes={film.disliked} onLike={handleListLike} onDisLike={handleListDisLike}/>  
         </div>
       ))}
-    <div style={{ position: 'fixed',  bottom: '20px',  left: '20px',  backgroundColor: 'beige',  color: 'brown', padding: '15px', border: '2px solid brown', borderRadius: '10px',  zIndex: 1000}}>
-      <h2 style={{color: 'green'} }>Мне понравилось:</h2>
+    <div className={classnames('checkerColour')}>
+     <h2 className={classnames('liked-title')}>Мне понравилось:</h2>
       {likedFilms.map((film)=>(
         <li key={film}>{film}</li>
-      ))}<h2 style={{color: 'green'} }>Мне НЕ понравилось:</h2>
+      ))}<h2 className={classnames('disliked-title')}>Мне НЕ понравилось:</h2>
       {disLikedFilms.map((film)=>(
         <li key={film}>{film}</li>
       ))}

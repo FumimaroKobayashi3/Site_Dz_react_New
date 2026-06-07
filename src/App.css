@@ -182,3 +182,62 @@
     border-right-color: var(--border);
   }
 }
+
+
+.watched-container {
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    background-color: lightblue; 
+    padding: 15px; 
+    border: 2px solid blue;
+    border-radius: 10px;         
+    z-index: 1000;               
+}
+
+.watched-title {
+    color: blue;
+}
+.btn-base {
+    padding: 10px;
+    border-radius: 5px;
+    color: black;
+    background-color: gray;
+}
+
+
+.btn-liked {
+    color: white;
+    background-color: green;
+}
+.btn-disLiked {
+  color: white;
+  background-color: red;
+}
+.filter-name{
+  color: red
+}
+.checkerColour {
+   position: fixed;
+   bottom: 20px;
+   left: 20px;  
+   background-color: beige;  
+   color: brown; 
+   padding: 15px;
+   border: 2px solid brown;
+   border-radius: 10px;  
+   z-index: 1000;
+}
+.liked-title {
+  color: green;
+}
+.disliked-title {
+  color: red;
+}
+.film-card {
+  display: flex;
+  flex-direction: column; 
+  padding: 24px;
+  border: 1px solid black;
+  margin: 10px;
+}

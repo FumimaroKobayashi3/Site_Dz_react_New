@@ -1,4 +1,5 @@
 import { useState } from "react";
+import classnames from "classnames";
 import React from "react";
 function FilmCard(props){
     const [isLiked, setIsLiked] = useState(0)
@@ -30,28 +31,23 @@ function FilmCard(props){
     }
 
     return(
- <div style={{ display: 'flex', flexDirection: "column", padding: '24px', border: '1px solid black', margin: '10px' }}>
+ <div className={classnames('film-card')}>
             <h1>{props.title}</h1>
             <h4>{props.date}</h4>
+            <img src={props.img}/>
             <h4>{props.genre}</h4>
             <h3>{props.creatorName}</h3>
             <p>Понравилось : {props.likes + Number(isLiked)}</p>
             <p>НЕ Понравилось : {props.dislikes + Number(isDisLiked)}</p>
             <button 
                 onClick={handleLike}
-                style={{
-                    backgroundColor: isLiked ? 'green' : 'gray',
-                    color: isLiked ? 'white' : 'black'
-                }}
+                className={classnames('btn-base' ,{ 'btn-liked' : isLiked})}
             >
                 Лайкнуть
             </button>
             <button 
                 onClick={handleDisLike}
-                style={{
-                    backgroundColor: isDisLiked ? 'red' : 'gray',
-                    color: isDisLiked ? 'white' : 'black'
-                }}
+                className={classnames('btn-base' ,{ 'btn-disLiked' : isDisLiked})}
             >
                 Дизлайкнуть
             </button>
