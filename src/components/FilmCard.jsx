@@ -3,7 +3,7 @@ import React from "react";
 function FilmCard(props){
     const [isLiked, setIsLiked] = useState(0)
     const [isDisLiked, setIsDisLiked] = useState(0)
-
+    //самый простой хэндл сделал чтобы не тупить
     function handleLike(){
         if (isLiked === 0){
             setIsLiked(1)

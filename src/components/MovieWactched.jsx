@@ -1,6 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react"
-
+//здесь баг но я думаю как это пофиксить
 function MovieWatched(props){
     const [watched, setWatched] = useState(0)
     useEffect(() =>{
