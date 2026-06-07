@@ -8,19 +8,23 @@ function FilmCard(props){
         if (isLiked === 0){
             setIsLiked(1)
             setIsDisLiked(0)
+            props.onLike(props.title)
         }else{
             setIsLiked(0)
             setIsDisLiked(0)
+            props.onLike(props.title)
         }
     }
 
     function handleDisLike(){
-             if (isDisLiked === 0){
+        if (isDisLiked === 0){
             setIsDisLiked(1)
             setIsLiked(0)
+            props.onDisLike(props.title)
         }else{
             setIsDisLiked(0)
             setIsLiked(0)
+            props.onDisLike(props.title)
         }
        
     }
