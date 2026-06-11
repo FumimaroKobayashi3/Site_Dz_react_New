@@ -6,7 +6,7 @@ function MovieWatched(props){
     useEffect(() =>{
         //ради этого я блин выучил как работает set
         const wotched = new Set([...watched, ...props.liked, ...props.disliked])
-    setWatched(...wotched)
+    setWatched([...wotched])
     },[props.liked, props.disliked])
 
  return (
