@@ -3,18 +3,10 @@ import classnames from 'classnames'
 import FilmFilter from './FilmFilter.jsx'
 import FilmCard from './FilmCard.jsx'
 import MovieWatched from './MovieWactched.jsx'
+import {FiltrMovii} from './Utils.js'
+
 function RetSubStiTution({ filter, handleFilter, movieDB, likedFilms, disLikedFilms, handleListLike, handleListDisLike }){
-let filteredMovies = [];
-    for (let film of movieDB) {
-      if (
-        (filter.title === '' || film.name === filter.title) &&
-        (filter.yearFrom === '' || film.year >= filter.yearFrom) &&
-        (filter.yearTo === '' || film.year <= filter.yearTo) &&
-        (filter.genre === '' || film.genre === filter.genre)
-      ) {
-        filteredMovies.push(film);
-      }
-    }
+  let filteredMovies = FiltrMovii(movieDB, filter)
   return(
       <div>
       <FilmFilter filter={filter} handleFilter={handleFilter} />
