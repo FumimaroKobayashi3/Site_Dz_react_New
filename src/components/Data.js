@@ -5,12 +5,16 @@ import TEK from '../assets/Tekkenmovie_Poste.jpg'
 import TRF from '../assets/Transformers_Poste.jpg'
 import INT from '../assets/Inception_Poste.jpg'
 
+// здесь я не без посторонней помощи решил просто запихнуть названия фильмов в массив ибо так проще будет типа
+//теперь чисто в теории сюда можно и другие кадры будэ добавить чтобы проверить работу таймера
+// в общем преподу примечание что почему-то он об этом на занятии не рассказал и мне пришлось задание 2 через нейронку делать
+
 const MoviesList = [{
     
         id: v4(),
         name: "Космическая Одиссея 2001",
         creator: "Стэнли Кубрик",
-        img: SO,
+        img: [SO],
         genre: "Научная фантастика",
         year: 1968,
         liked: 168,
@@ -20,7 +24,7 @@ const MoviesList = [{
         id: v4(),
         name: "Пёрл - Харбор",
         creator: "Майкл Бэй",
-        img: PH,
+        img: [PH],
         genre: "Экшн",
         year: 2003,
         liked: 137,
@@ -30,7 +34,7 @@ const MoviesList = [{
         id: v4(),
         name: "Трансформеры",
         creator: "Майкл Бэй",
-        img: TRF,
+        img: [TRF],
         genre: "Экшн",
         year: 2001,
         liked: 178,
@@ -40,7 +44,7 @@ const MoviesList = [{
         id: v4(),
         name: "Теккен",
         creator: "Дуайт Х. Литтл",
-        img: TEK,
+        img: [TEK],
         genre: "Боевик",
         year: 2006,
         liked: 168,
@@ -50,7 +54,7 @@ const MoviesList = [{
       id: v4(),
       name: "Начало",
       creator: "Кристофер Нолан",
-      img: INT,
+      img: [INT],
       genre: 'Боевик',
       year: 2010,
       liked: 345,

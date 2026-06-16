@@ -6,9 +6,6 @@ import FilmPage from './components/FilmPage.jsx'
 import { BrowserRouter, Routes, Route, Link, useSearchParams } from 'react-router-dom'
 import './App.css'
 import MoviesList from './components/Data.js'
-//плакатики
-
-
 import RetSubStiTution from './components/RetSubStiTution.jsx'
 import { useEffect } from 'react'
 import classnames from "classnames"

@@ -3,6 +3,7 @@
 
 import { useParams, Link } from "react-router-dom"
 import FilmCard from './FilmCard'
+import { useEffect, useRef, useState } from "react"
 
 function FilmPage({ movieDB, handleListLike, handleListDisLike }){
     const { id } = useParams()
@@ -16,6 +17,19 @@ function FilmPage({ movieDB, handleListLike, handleListDisLike }){
             Folm = i
         }
     }
+    const [imgInd, setImgInd] = useState(0)
+    const indRef = useRef(null)
+    useEffect(()=> {
+        if (Folm && Folm.img){
+            indRef.current = setInterval(() => {
+                setImgInd(Folm.img[imgInd + 1] ? imgInd + 1 : 0)
+            }, 5000)
+        }
+        return function(){
+            clearInterval(indRef.current)
+    }
+    }, [Folm, imgInd])
+
     
     if (Folm === undefined) {
         return <h2>Если вы это видите значит здесь ошибка</h2>
@@ -32,7 +46,7 @@ function FilmPage({ movieDB, handleListLike, handleListDisLike }){
                 date={Folm.year} 
                 creatorName={Folm.creator} 
                 genre={Folm.genre} 
-                img={Folm.img} 
+                img={Folm.img ? Folm.img[imgInd] : undefined} 
                 likes={Folm.liked} 
                 dislikes={Folm.disliked} 
                 onLike={handleListLike} 
