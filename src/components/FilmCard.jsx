@@ -9,11 +9,11 @@ function FilmCard(props){
         if (isLiked === 0){
             setIsLiked(1)
             setIsDisLiked(0)
-            props.onLike(props.title)
+            props.onLike(props.id)
         }else{
             setIsLiked(0)
             setIsDisLiked(0)
-            props.onLike(props.title)
+            props.onLike(props.id)
         }
     }
 
@@ -21,11 +21,11 @@ function FilmCard(props){
         if (isDisLiked === 0){
             setIsDisLiked(1)
             setIsLiked(0)
-            props.onDisLike(props.title)
+            props.onDisLike(props.id)
         }else{
             setIsDisLiked(0)
             setIsLiked(0)
-            props.onDisLike(props.title)
+            props.onDisLike(props.id)
         }
        
     }

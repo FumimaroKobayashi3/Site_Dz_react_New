@@ -42,6 +42,7 @@ function FilmPage({ movieDB, handleListLike, handleListDisLike }){
             </Link>
             
             <FilmCard 
+                id={Folm.id}
                 title={Folm.name} 
                 date={Folm.year} 
                 creatorName={Folm.creator} 

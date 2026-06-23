@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { act, useReducer, useState } from 'react'
 import FilmCard from './components/FilmCard.jsx'
 import MovieWatched from './components/MovieWactched.jsx'
 import FilmFilter from './components/FilmFilter.jsx'
@@ -10,10 +10,39 @@ import RetSubStiTution from './components/RetSubStiTution.jsx'
 import { useEffect } from 'react'
 import classnames from "classnames"
 
+function HandleRed(state, action) {
+  //здесь каюсь прибеугнул к нейронку чтобы понять как работает свитч-кейз. не обессуйте пожалуйста. это только этот кусок
+//переменные для фильтра айдишек
+  let filteredLiked = state.likedFilms.filter(id => id !== action.payload)
+  let filteredDisLiked = state.disLikedFilms.filter(id => id !== action.payload)
+
+switch (action.type) {
+    case 'like':
+      return {
+        // Проверяем, был ли фильм в лайках используя элемент [0]
+        // Если был — очищаем массив. если нет - добавляем в конец
+        //filter(id => id === action.payload)[0] это надо потому что я не пишу код который не понимаю
+        likedFilms: state.likedFilms.filter(id => id === action.payload)[0] ? filteredLiked : [...filteredLiked, action.payload],
+        // Из дизлайков этот фильм в любом случае стираем
+        disLikedFilms: filteredDisLiked
+      }
+      //зеркально
+    case 'disLike':
+      return {
+
+        likedFilms: filteredLiked,
+        disLikedFilms: state.disLikedFilms.filter(id => id === action.payload)[0] ? filteredDisLiked : [...filteredDisLiked, action.payload]
+      }
+
+    default:
+      return state
+  }
+}
+
 export default function App() {
   //юзстэйты
- const [likedFilms, setLikedFilms] = useState([])
- const [disLikedFilms, setDisLikedFilms] = useState([])
+  //здесь я удалил для лайкед и дизлайкед и поставил юзредюсер
+  const [state, dispatch] = useReducer(HandleRed, {likedFilms:[], disLikedFilms:[]})
  const[movieDB, setMovieDB] = useState([])
  const [searchPars, setSearchPars] = useSearchParams()
 //это юзстейт для фильтра
@@ -50,30 +79,16 @@ useEffect(() => {
   setMovieDB(MoviesList)
   //уже комментарий для себя это что это чтобы функция по сто раз не повторялась
 }, [])
-//тожн шпаргалка для себя уже  как удобно сделать лайк-дизлайк и в лист понравившихся и не понравившихся
-//в обычном джс используют сплайс но... я забыл чё это да и в реакте так нельзя
-//.filter() не меняет исходный массив, он создает новый массив, 
-// в который кладет только те фильмы (f), имя которых не совпадает (!==) с тем фильмом (film), на который мы кликнули.
-function handleListLike(film){
-  if (likedFilms.includes(film)){
-    setLikedFilms(likedFilms.filter(f => f !== film))
-  } else {
-    setLikedFilms([...likedFilms, film])
-    setDisLikedFilms(disLikedFilms.filter(f => f !== film))
-  }
+
+//перелопатил хэндл
+//здесь диспатч
+function handleListLike(id) {
+  dispatch({ type: 'like', payload: id });
 }
 
-function handleListDisLike(film){
-  if (disLikedFilms.includes(film)){
-    setDisLikedFilms(disLikedFilms.filter(f => f !== film))
-  } else {
-    setDisLikedFilms([...disLikedFilms, film])
-    setLikedFilms(likedFilms.filter(f => f !== film))
-  }
+function handleListDisLike(id) {
+  dispatch({ type: 'disLike', payload: id });
 }
-
-
- 
   return(
     <div>
       
@@ -81,8 +96,8 @@ function handleListDisLike(film){
       <Route path='/' element={<RetSubStiTution filter={filter}
           handleFilter={handleFilter}
           movieDB={movieDB}
-          likedFilms={likedFilms}
-          disLikedFilms={disLikedFilms}
+          likedFilms={state.likedFilms}
+          disLikedFilms={state.disLikedFilms}
           handleListLike={handleListLike}
           handleListDisLike={handleListDisLike}/>}>
       

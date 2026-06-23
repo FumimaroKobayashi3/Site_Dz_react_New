@@ -13,7 +13,7 @@ function RetSubStiTution({ filter, handleFilter, movieDB, likedFilms, disLikedFi
       <FilmFilter filter={filter} handleFilter={handleFilter} />
       {filteredMovies.map((film)=>(
         <div key={film.id}>
-        <FilmCard title={film.name} date={film.year} creatorName={film.creator} genre={film.genre} img={film.img[0] || PLC } likes={film.liked} dislikes={film.disliked} onLike={handleListLike} onDisLike={handleListDisLike}/>
+        <FilmCard id ={film.id} title={film.name} date={film.year} creatorName={film.creator} genre={film.genre} img={film.img[0] || PLC } likes={film.liked} dislikes={film.disliked} onLike={handleListLike} onDisLike={handleListDisLike}/>
         </div>
       ))}
     <div className={classnames('checkerColour')}>
