@@ -9,6 +9,8 @@ import MoviesList from './components/Data.js'
 import RetSubStiTution from './components/RetSubStiTution.jsx'
 import { useEffect } from 'react'
 import classnames from "classnames"
+import ThemeToggle, {createCont} from './components/ThemeToggle.jsx'
+
 
 function HandleRed(state, action) {
   //здесь каюсь прибеугнул к нейронку чтобы понять как работает свитч-кейз. не обессуйте пожалуйста. это только этот кусок
@@ -45,6 +47,8 @@ export default function App() {
   const [state, dispatch] = useReducer(HandleRed, {likedFilms:[], disLikedFilms:[]})
  const[movieDB, setMovieDB] = useState([])
  const [searchPars, setSearchPars] = useSearchParams()
+ const [themes, setThemes] = useState('theme-light')
+
 //это юзстейт для фильтра
 const filter = {
   title: searchPars.get('search') || '',
@@ -89,9 +93,28 @@ function handleListLike(id) {
 function handleListDisLike(id) {
   dispatch({ type: 'disLike', payload: id });
 }
+// функция для туггл
+
+    function themeTog(){
+        //тут я загуглил про свитч-кейс чтобы проще было менять темку
+        switch (themes) {
+            case 'theme-light':
+                setThemes('theme-dark')
+                break
+            case 'theme-dark':
+                setThemes('theme-light')
+                break
+            default:
+                setThemes('theme-light')
+                break
+        }
+    }
   return(
-    <div>
-      
+    <createCont.Provider value={{themes, themeTog}}>
+    <div className={classnames(themes)} style={{ minHeight: '100vh' }}>
+      <header style={{ position: 'absolute', right: '20px', top: '20px' }}>
+        <ThemeToggle/>
+      </header>
       <Routes>
       <Route path='/' element={<RetSubStiTution filter={filter}
           handleFilter={handleFilter}
@@ -109,6 +132,7 @@ function handleListDisLike(id) {
     />} />
     </Routes>
     </div>
+    </createCont.Provider>
 
  )
 }
