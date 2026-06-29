@@ -67,19 +67,12 @@
   margin: 10px;
 }
 
-.btn-base {
-  padding: 10px;
-  border-radius: 5px;
-  color: black;
-  background-color: gray;
-}
-
-.btn-liked {
+.btn-base.btn-liked {
   color: white;
   background-color: green;
 }
 
-.btn-disLiked {
+.btn-base.btn-disLiked {
   color: white;
   background-color: red;
 }

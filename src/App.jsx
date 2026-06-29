@@ -1,4 +1,4 @@
-import { act, useReducer, useState } from 'react'
+import { act, useCallback, useReducer, useState } from 'react'
 import FilmCard from './components/FilmCard.jsx'
 import MovieWatched from './components/MovieWactched.jsx'
 import FilmFilter from './components/FilmFilter.jsx'
@@ -86,13 +86,15 @@ useEffect(() => {
 
 //перелопатил хэндл
 //здесь диспатч
-function handleListLike(id) {
-  dispatch({ type: 'like', payload: id });
-}
+//а также для полной работы здесь юзколлбэк
+//он нужен чтобы всё относительно работало
+const handleListLike = useCallback((id)=> {
+  dispatch({ type: 'like', payload: id })
+}, [])
 
-function handleListDisLike(id) {
-  dispatch({ type: 'disLike', payload: id });
-}
+const handleListDisLike = useCallback((id) => {
+  dispatch({ type: 'disLike', payload: id })
+},[])
 // функция для туггл
 
     function themeTog(){
