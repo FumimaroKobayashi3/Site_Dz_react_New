@@ -3,13 +3,14 @@ import classnames from "classnames";
 import React from "react";
 function FilmCard(props){
     //самый простой хэндл сделал чтобы не тупить
-function handleLike() {
+    //завернул их в юзколлбэк
+const handleLike = useCallback(() => {
         props.onLike(props.id)
-    }
+    }, [props.onLike, props.id]) 
 
-    function handleDisLike() {
+    const handleDisLike = useCallback(() => {
         props.onDisLike(props.id)
-    }
+    }, [props.onDisLike, props.id])
    return (
         <div className={classnames('film-card')}>
             <h1>{props.title}</h1>
